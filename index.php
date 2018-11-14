@@ -17,7 +17,7 @@ Duration in Minutes(0 = 2hrs)<input type = "number" min = "00" max = "120" step 
 
 <h2>Recording Schedule</h2>
 <table>
-<tr><th>Service To Record</th><th>status</th><th>Start Recording</th><th>Stop Recording</th><th>Recording Control</th><th>Download</th></th>Human touched</th></tr>
+<tr><th>Service To Record</th><th>status</th><th>Start Recording</th><th>Stop Recording</th><th>Recording Control</th><th>Download</th></tr>
 <?php
 $ServicesToRecord = ServicesToRecord();
 While($row = mysqli_fetch_assoc($ServicesToRecord))
@@ -36,7 +36,7 @@ While($row = mysqli_fetch_assoc($ServicesToRecord))
 		$Option = "<a href = 'ManuallyDelete.php?id=".$row['id']."'>Delete</a>";
 	}
 	if($Download){$Download = '<a href="'.$row['FileLocation'].$row['id'].'.wav'.'">Download</a>';}
-	echo '<tr><td>'.$row['id'].'</td><td>'.$row['Title'].'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Start'])).'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Stop'])).'</td><td>'.$Option.'</td><td>'.$Download.'</td><td>'.$row['Human_Touched'].'</td></tr>';
+	echo '<tr><td>'.$row['id'].'</td><td>'.$row['Title'].'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Start'])).'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Stop'])).'</td><td>'.$Option.'</td><td>'.$Download.'</td></tr>';
 }
 ?>
 </table>
