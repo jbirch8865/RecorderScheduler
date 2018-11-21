@@ -82,13 +82,6 @@ function GetFilesRecording()
 	$FileState1 = GetCurrentFileState();
 	sleep(2);
 	$FileState2 = GetCurrentFileState();
-	/*
-	echo '<br><br>';
-	print_r($FileState1);
-	echo '<br><br>';
-	print_r($FileState2);
-	echo '<br><br>';
-	*/
 	$ChangedFiles = array();
 	if(count($FileState1) == count($FileState2))
 	{
@@ -195,6 +188,20 @@ function SetRecordingStatusToUploaded($id)
 {
 	$Link = new MySQLLink('Dayspring');
 	$Link->ExecuteSQLQuery("UPDATE Services_To_Record SET RecordingStatus = '5' WHERE id = '$id'");
+	
+}
+
+function SetRecordingStatusToRendering($id)
+{
+	$Link = new MySQLLink('Dayspring');
+	$Link->ExecuteSQLQuery("UPDATE Services_To_Record SET RecordingStatus = '7' WHERE id = '$id'");
+	
+}
+
+function SetRecordingStatusTo($id)
+{
+	$Link = new MySQLLink('Dayspring');
+	$Link->ExecuteSQLQuery("UPDATE Services_To_Record SET RecordingStatus = '7' WHERE id = '$id'");
 	
 }
 

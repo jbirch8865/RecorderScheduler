@@ -10,4 +10,5 @@ ShouldIBeRecording(); //Runs every minute
 SetAutoRecordsToStopAfterDuration(); //Runs every minute
 OutOfSyncErrors(); //Runs at the top of every hour
 ProcessStoppedFiles(); //Runs every minute
+ProcessRenderingFiles(); //Runs every minute
 ?>
