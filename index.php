@@ -19,13 +19,20 @@ Duration in Minutes(0 = 2hrs)<input type = "number" min = "00" max = "120" step 
 <table>
 <tr><th>Service To Record</th><th>status</th><th>Start Recording</th><th>Stop Recording</th><th>Recording Control</th><th>Download</th><th>File Size</th></tr>
 <?php
+function human_filesize($bytes, $decimals = 2) {
+    $size = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
+    $factor = floor((strlen($bytes) - 1) / 3);
+    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+}
+
+
 $ServicesToRecord = ServicesToRecord();
 While($row = mysqli_fetch_assoc($ServicesToRecord))
 {
 	$Download = true;
 	if(file_exists("/var/www/html/DayspringMen/Recordings/".$row['id'].".wav"))
 	{
-		$fileSize = filesize("/var/www/html/DayspringMen/Recordings/".$row['id'].".wav");
+		$fileSize = human_filesize(filesize("/var/www/html/DayspringMen/Recordings/".$row['id'].".wav"));
 	}else
 	{
 		$fileSize = "Pending";
