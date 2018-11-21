@@ -1,6 +1,12 @@
 <?php
 include '../DBClass.php';
 include 'AutoRecord.php';
+function human_filesize($bytes, $decimals = 2) {
+    $size = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
+    $factor = floor((strlen($bytes) - 1) / 3);
+    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
+}
+
 ?>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +14,7 @@ include 'AutoRecord.php';
 <script src = "LoadPage.js"></script>
 </head>
 <body>
+<h1>Avaiable Disk Size - <?php human_filesize(disk_free_space("/var/www/html/DayspringMen/"));?> </h2>
 <form action = "ManuallyRecord.php" method = "GET">
 <h2>Recording Status</h2>
 Duration in Minutes(0 = 2hrs)<input type = "number" min = "00" max = "120" step = "01" name = "DurationinMinutes" value = "00" required><br><br>
@@ -19,13 +26,6 @@ Duration in Minutes(0 = 2hrs)<input type = "number" min = "00" max = "120" step 
 <table>
 <tr><th>Service To Record</th><th>status</th><th>Start Recording</th><th>Stop Recording</th><th>Recording Control</th><th>Download</th><th>File Size</th></tr>
 <?php
-function human_filesize($bytes, $decimals = 2) {
-    $size = array('B','kB','MB','GB','TB','PB','EB','ZB','YB');
-    $factor = floor((strlen($bytes) - 1) / 3);
-    return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$size[$factor];
-}
-
-
 $ServicesToRecord = ServicesToRecord();
 While($row = mysqli_fetch_assoc($ServicesToRecord))
 {
