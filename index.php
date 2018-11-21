@@ -14,7 +14,7 @@ function human_filesize($bytes, $decimals = 2) {
 <script src = "LoadPage.js"></script>
 </head>
 <body>
-<h1>Avaiable Disk Size - <?php echo human_filesize(disk_free_space("/var/www/html/DayspringMen/"));?> </h2>
+<h2>Avaiable Recording Space - <?php echo human_filesize(disk_free_space("/var/www/html/DayspringMen/"));?> </h2>
 <form action = "ManuallyRecord.php" method = "GET">
 <h2>Recording Status</h2>
 Duration in Minutes(0 = 2hrs)<input type = "number" min = "00" max = "120" step = "01" name = "DurationinMinutes" value = "00" required><br><br>
