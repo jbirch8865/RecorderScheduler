@@ -23,7 +23,13 @@ $ServicesToRecord = ServicesToRecord();
 While($row = mysqli_fetch_assoc($ServicesToRecord))
 {
 	$Download = true;
-
+	if(file_exists("/var/www/html/DayspringMen/Recordings/".$row['id'].".wav"))
+	{
+		$fileSize = filesize("/var/www/html/DayspringMen/Recordings/".$row['id'].".wav");
+	}else
+	{
+		$fileSize = "Pending";
+	}
 	if($row['Title'] == 'Pending')
 	{
 		$Download = false;
@@ -36,7 +42,7 @@ While($row = mysqli_fetch_assoc($ServicesToRecord))
 		$Option = "<a href = 'ManuallyDelete.php?id=".$row['id']."'>Delete</a>";
 	}
 	if($Download){$Download = '<a href="'.$row['FileLocation'].$row['id'].'.wav'.'">Download</a>';}
-	echo '<tr><td>'.$row['id'].'</td><td>'.$row['Title'].'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Start'])).'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Stop'])).'</td><td>'.$Option.'</td><td>'.$Download.'</td><td>'.filesize("/var/www/html/Dayspring/Recordings/".$row['id'].".wav").'</td></tr>';
+	echo '<tr><td>'.$row['id'].'</td><td>'.$row['Title'].'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Start'])).'</td><td>'.date('M-d h:i A',strtotime($row['Timestamp_To_Stop'])).'</td><td>'.$Option.'</td><td>'.$Download.'</td><td>'.$fileSize.'</td></tr>';
 }
 ?>
 </table>
